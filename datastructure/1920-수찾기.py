@@ -1,11 +1,23 @@
 N = int(input())
-A = [list(map(int,input().split())) for i in range(N)]
+A = list(map(int, input().split()))
 M = int(input())
-M_list = [list(map(int,input().split())) for i in range(M)]
+arr=list(map(int,input().split()))
+A.sort()
 
-for i in M_list:
-  for j in A:
-    if i == j:
+for num in arr:
+  lt, rt = 0, N-1
+  isExist = False
+
+  while lt <= rt:
+    mid = (lt + rt) // 2
+
+    if A[mid] == num:
+      isExist = True
       print(1)
+      break
+    elif A[mid] > num :
+      rt = mid - 1
     else:
-      print(0)
+      lt = mid + 1
+  if not isExist:
+    print(0)
