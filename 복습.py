@@ -1,33 +1,33 @@
-
-# 1. 알고리즘 설계
 import sys
 
-input = sys.stdin.readline
-
-cnt = 1
-flag = 0 #  설정
-stack = []
-op = []
-
 n = int(input())
+word = input()
+n_list = [0] * n 
+stack = []
+
+
 for i in range(n):
-  num = int(input()) # 사용자가 값을 입력 
-  while cnt <= num:
-    stack.append(cnt) # 스택을 넣었다가 뽑아늘어놓음으로써 -> hint
-    op.append('+')
-    cnt += 1 
-
-  if stack[-1] == num:
-    stack.pop()
-    op.append('-')
-
+  n_list[i] = int(input())
+  
+for i in word:
+  if 'A' <= i <= 'Z':
+    stack.append(n_list[ord(i)-ord('A')])
+    
   else:
-    print("NO")
-    flag = 1
-    break
-
-if flag == 0:
-  for i in op:
-    print(i)
-
-
+    str2 = stack.pop()
+    str1 = stack.pop()
+    
+    if i == "+":
+      stack.append(str1+str2)
+      
+    elif i == "-":
+      stack.append(str1-str2)
+      
+    elif i == "*":
+      stack.append(str1*str2)
+      
+    elif i == "/":
+      stack.append(str1/str2)
+      
+print('%.2f' %stack[0])  
+    
